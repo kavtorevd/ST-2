@@ -113,11 +113,88 @@ TEST(Dmitry_Kavtorev_Test_Circle, update_area_test) {
     ASSERT_DOUBLE_EQ(50.24, c.getArea());
 }
 
+TEST(Dmitry_Kavtorev_Test_Circle, large_radius_test) {
+    Circle c(1e6);
+    ASSERT_DOUBLE_EQ(1e6, c.getRadius());
+    ASSERT_DOUBLE_EQ(1e6 * 2 * Circle::PI, c.getFerence());
+    ASSERT_DOUBLE_EQ(1e6 * 1e6 * Circle::PI, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, large_ference_test) {
+    Circle c;
+    c.setFerence(1e6);
+    ASSERT_DOUBLE_EQ(1e6 / (2 * Circle::PI), c.getRadius());
+    ASSERT_DOUBLE_EQ(1e6, c.getFerence());
+    ASSERT_DOUBLE_EQ((1e6 / (2 * Circle::PI)) * (1e6 / (2 * Circle::PI)) * Circle::PI, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, large_area_test) {
+    Circle c;
+    c.setArea(1e12);
+    ASSERT_DOUBLE_EQ(sqrt(1e12 / Circle::PI), c.getRadius());
+    ASSERT_DOUBLE_EQ(2 * Circle::PI * sqrt(1e12 / Circle::PI), c.getFerence());
+    ASSERT_DOUBLE_EQ(1e12, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, small_radius_test) {
+    Circle c(1e-6);
+    ASSERT_DOUBLE_EQ(1e-6, c.getRadius());
+    ASSERT_DOUBLE_EQ(1e-6 * 2 * Circle::PI, c.getFerence());
+    ASSERT_DOUBLE_EQ(1e-6 * 1e-6 * Circle::PI, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, small_ference_test) {
+    Circle c;
+    c.setFerence(1e-6);
+    ASSERT_DOUBLE_EQ(1e-6 / (2 * Circle::PI), c.getRadius());
+    ASSERT_DOUBLE_EQ(1e-6, c.getFerence());
+    ASSERT_DOUBLE_EQ((1e-6 / (2 * Circle::PI)) * (1e-6 / (2 * Circle::PI)) * Circle::PI, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, small_area_test) {
+    Circle c;
+    c.setArea(1e-12);
+    ASSERT_DOUBLE_EQ(sqrt(1e-12 / Circle::PI), c.getRadius());
+    ASSERT_DOUBLE_EQ(2 * Circle::PI * sqrt(1e-12 / Circle::PI), c.getFerence());
+    ASSERT_DOUBLE_EQ(1e-12, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, update_radius_to_zero_test) {
+    Circle c(2);
+    c.setRadius(0);
+    ASSERT_DOUBLE_EQ(0, c.getRadius());
+    ASSERT_DOUBLE_EQ(0, c.getFerence());
+    ASSERT_DOUBLE_EQ(0, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, update_ference_to_zero_test) {
+    Circle c(2);
+    c.setFerence(0);
+    ASSERT_DOUBLE_EQ(0, c.getRadius());
+    ASSERT_DOUBLE_EQ(0, c.getFerence());
+    ASSERT_DOUBLE_EQ(0, c.getArea());
+}
+
+TEST(Dmitry_Kavtorev_Test_Circle, update_area_to_zero_test) {
+    Circle c(2);
+    c.setArea(0);
+    ASSERT_DOUBLE_EQ(0, c.getRadius());
+    ASSERT_DOUBLE_EQ(0, c.getFerence());
+    ASSERT_DOUBLE_EQ(0, c.getArea());
+}
+
 TEST(Dmitry_Kavtorev_Test_EarthAndRopeSolve, positive_test) {
     double earthRadius = 6371.0;
     double growth = 10.0;
     double result = EarthAndRopeSolve(earthRadius, growth);
     ASSERT_NEAR(result, growth / (2 * Circle::PI), 1e-6);
+}
+
+TEST(Dmitry_Kavtorev_Test_EarthAndRopeSolve, zero_growth_test) {
+    double earthRadius = 6371.0;
+    double growth = 0.0;
+    double result = EarthAndRopeSolve(earthRadius, growth);
+    ASSERT_NEAR(result, 0.0, 1e-6);
 }
 
 TEST(Dmitry_Kavtorev_Test_SwimmingPoolSolve, positive_test) {
