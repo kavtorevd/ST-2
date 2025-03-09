@@ -125,7 +125,8 @@ TEST(Dmitry_Kavtorev_Test_Circle, large_ference_test) {
     c.setFerence(1e6);
     ASSERT_DOUBLE_EQ(1e6 / (2 * Circle::PI), c.getRadius());
     ASSERT_DOUBLE_EQ(1e6, c.getFerence());
-    ASSERT_DOUBLE_EQ((1e6 / (2 * Circle::PI)) * (1e6 / (2 * Circle::PI)) * Circle::PI, c.getArea());
+    ASSERT_DOUBLE_EQ((1e6 / (2 * Circle::PI)) * (1e6 / (2 * Circle::PI)) *
+                    Circle::PI, c.getArea());
 }
 
 TEST(Dmitry_Kavtorev_Test_Circle, large_area_test) {
@@ -148,7 +149,8 @@ TEST(Dmitry_Kavtorev_Test_Circle, small_ference_test) {
     c.setFerence(1e-6);
     ASSERT_DOUBLE_EQ(1e-6 / (2 * Circle::PI), c.getRadius());
     ASSERT_DOUBLE_EQ(1e-6, c.getFerence());
-    ASSERT_DOUBLE_EQ((1e-6 / (2 * Circle::PI)) * (1e-6 / (2 * Circle::PI)) * Circle::PI, c.getArea());
+    ASSERT_DOUBLE_EQ((1e-6 / (2 * Circle::PI)) * (1e-6 / (2 * Circle::PI)) *
+                    Circle::PI, c.getArea());
 }
 
 TEST(Dmitry_Kavtorev_Test_Circle, small_area_test) {
